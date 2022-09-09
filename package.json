@@ -1,0 +1,23 @@
+{
+  "name": "ohmystrapi",
+  "version": "1.0.0-alpha",
+  "description": "A lib based on OhMyFetch to consume strapi API",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx vitest",
+    "coverage": "NODE_OPTIONS=--experimental-vm-modules npx vitest run --coverage"
+  },
+  "author": "Thierry POINOT <thierry@shoot-shoot.com>",
+  "license": "ISC",
+  "dependencies": {
+    "jwt-decode": "^3.1.2",
+    "locutus": "^2.0.16",
+    "ohmyfetch": "^0.4.18",
+    "qs": "^6.11.0"
+  },
+  "devDependencies": {
+    "@vitest/ui": "^0.23.1",
+    "vitest": "^0.23.1"
+  }
+}
