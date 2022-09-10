@@ -1,6 +1,14 @@
 import {useContentManagerApi} from "../plugins/content-manager.js";
 
 /**
+ * @template T
+ * @callback EntityMapperCallback<T> A callback to pass all objects returned from the API
+ * @param {Object} object
+ * @returns {T}
+ */
+
+
+/**
  * @template M
  */
 export default class API {
@@ -35,8 +43,12 @@ export default class API {
     }) {
         this.entity = entity;
         this.entityMapper = entityMapper;
+        if (!entityMapper) {
+            this.entityMapper = (obj) => obj;
+        }
+        console.log('entityMapper', entityMapper, this.entityMapper);
         this.populateConfig = populateConfig;
         this.strapi = strapi;
-        this.contentManager = useContentManagerApi(strapi);
+        this.contentManager = useContentManagerApi().install({strapi});
     }
 }

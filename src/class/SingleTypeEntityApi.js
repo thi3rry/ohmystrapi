@@ -7,7 +7,7 @@ import API from "./API.js";
 export default class SingleTypeEntityApi extends API {
     async fetch() {
         const {data} = await this.strapi.createFetch()(`${this.strapi.apiBaseUrl}/${this.entity}`, { params: {populate: this.populateConfig} })
-        return this.entityMapper({...data.attributes, id: data.id});
+        return this.entityMapper(data);
     }
 
     /**
@@ -22,7 +22,7 @@ export default class SingleTypeEntityApi extends API {
             body: attributes,
             params: { populate: this.populateConfig }
         })
-        return this.entityMapper({...data.attributes, id: data.id});
+        return this.entityMapper(data);
     }
 
     async delete (entity) {

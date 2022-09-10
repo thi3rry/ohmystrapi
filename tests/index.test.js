@@ -1,6 +1,4 @@
-import {
-    useStrapi,
-} from '../src/index.js';
+import { useStrapi } from '../src/strapi.js';
 import { describe, test, expect, afterEach } from 'vitest'
 import {$wait} from "../src/utils.js";
 

@@ -22,12 +22,9 @@ export const useStrapi = ({
     apiPrefix = '/'+ltrim(rtrim(apiPrefix, '/'), '/');
 
     const apiBaseUrl = baseUrl+apiPrefix
+
     /**
      * @typedef StrapiAPI
-     * @property baseUrl The base URL of the strapi
-     * @property apiBaseUrl the url of the API of your strapi instance
-     * @method getMediaUrl()
-     * @method createFetch()
      */
     return {
         baseUrl,
@@ -97,17 +94,17 @@ export const useStrapi = ({
 
             return strapiFetch;
 
-            return (...args) => {
-                const f = returnResponseData ? strapiFetch : strapiFetch.raw;
-                return f(...args)
-                    .catch((error) => {
-                        if (returnResponseData) {
-                            return Promise.reject(error.data || null)
-                        }
-                        return Promise.reject(error);
-                    })
-                    ;
-            }
+            // return (...args) => {
+            //     const f = returnResponseData ? strapiFetch : strapiFetch.raw;
+            //     return f(...args)
+            //         .catch((error) => {
+            //             if (returnResponseData) {
+            //                 return Promise.reject(error.data || null)
+            //             }
+            //             return Promise.reject(error);
+            //         })
+            //         ;
+            // }
         },
 
         async isAlive() {
@@ -134,19 +131,25 @@ export const useStrapi = ({
             return url
         },
 
+        /**
+         * @typedef Plugin
+         * @property name
+         * @property {Function} install
+         * @return {*}
+         */
+
 
         /**
          * Add property to this object
-         *
          * @example const strapi = useStrapi();
          * strapi.use('user', useUsersPermissionsApi);
-         * @param name
-         * @param callback
-         * @param params Params to pass to the callback after the first strapi argument
-         * @return the use function initialized with the strapi object
+         * @param {Plugin<T>} plugin
+         * @param params? Params to pass to the callback after the first strapi argument
+         * @return {T} the use function initialized with the strapi object
          */
-        use(name, callback, ...params) {
-            this[name] = callback(this, params);
+        use(plugin) {
+            const {name, install} = plugin;
+            this[name] = install({strapi: this});
             return this[name];
         }
     };

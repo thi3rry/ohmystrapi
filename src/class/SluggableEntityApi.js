@@ -5,7 +5,7 @@
  */
 import CollectionEntityApi from "./CollectionEntityApi.js";
 
-export default class SluggableEntityApi extends CollectionEntityApi{
+export default class SluggableEntityApi extends CollectionEntityApi {
     /** @type ApiFindOneMethod */
     async findOne({id, slug}) {
         if (id) {

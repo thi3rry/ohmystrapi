@@ -1,6 +1,4 @@
-import {
-    useStrapi,
-} from '../src/index.js';
+import { useStrapi } from '../src/strapi.js';
 import { useUsersPermissionsApi } from '../src/plugins/users-permissions.js';
 import { describe, test, expect, afterEach } from 'vitest'
 import {getMessage} from "../src/data/strapi-api-messages.js";
@@ -10,13 +8,13 @@ const strapiUrl = 'http://localhost:1337';
 const strapi = useStrapi({
     baseUrl: strapiUrl,
 });
+const strapiUserApi = strapi.use(useUsersPermissionsApi());
 
 
 
 afterEach(() => $wait(0.2))
 
 describe('Users permissions', () => {
-    const strapiUserApi = strapi.use('user', useUsersPermissionsApi);
     describe('Login success', () => {
         // Wait for 500ms after each test to avoid HTTP 429 too many attemps
         afterEach(async () => $wait(0.5));

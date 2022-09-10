@@ -1,5 +1,4 @@
 /**
- * @typedef Strapi4RestError
  * @property {number} status HTTP Status
  * @property {string|'ApplicationError'|'ValidationError'} name Strapi error name ('ApplicationError' or 'ValidationError')
  * @property {string} message A human reable error message
@@ -14,8 +13,6 @@ export interface Strapi4RestError {
 
 
 /**
- * @template T
- * @typedef Strapi4SingleEntryApiResponse<T>
  * @property {number} id
  * @property {Object|T} attributes
  */
@@ -25,7 +22,6 @@ export interface Strapi4SingleEntryApiResponse<T> {
 }
 
 /**
- * @typedef Strapi4ApiResponse<T>
  * @property {Object|null|Strapi4SingleEntryApiResponse|Strapi4SingleEntryApiResponse[]|T} data the response data itself
  * @property {Object} meta information about pagination, publication state, available locales, etc.
  * @property {Strapi4ApiMetaPaginationByOffsetResponse|Strapi4ApiMetaPaginationByPageResponse} [meta.pagination]
@@ -38,7 +34,6 @@ export interface Strapi4ApiResponse<T> {
 }
 
 /**
- * @typedef Strapi4PaginationByOffsetParams
  * @property {number} start default to 0
  * @property {number} limit default to 25
  * @property {boolean} withCount default to true
@@ -50,7 +45,6 @@ export interface Strapi4PaginationByOffsetParams {
 }
 
 /**
- * @typedef Strapi4PaginationByPageParams
  * @property {number} page default to 1
  * @property {number} pageSize default to 25
  * @property {boolean} withCount default to true
@@ -63,7 +57,6 @@ export interface Strapi4PaginationByPageParams {
 
 
 /**
- * @typedef Strapi4QueryParams
  * @property {string[]} [fields] {@link https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.html#field-selection}
  * @property {string|Object|'*'} [populate] {@link https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.html#relation-media-fields}
  */
@@ -73,14 +66,11 @@ export interface Strapi4QueryParams {
 }
 
 /**
- * @typedef Strapi4SearchParams
- * @extends Strapi4QueryParams
  * @property {array} [sort] An array of the field name to order (default order is asc) (eg: ['title:asc', 'date:desc'])
  * @property {Object} [filters] {@link https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/filtering-locale-publication.html#filtering}
  * @property {Strapi4PaginationByPageParams|Strapi4PaginationByOffsetParams} [pagination]
  * @property {string|'live'|'preview'} [publicationState]
  * @property {string} [locale]
- *
  */
 export interface Strapi4SearchParams extends Strapi4QueryParams {
     sort?: string[];
@@ -95,7 +85,6 @@ export interface Strapi4SearchParams extends Strapi4QueryParams {
 
 /**
  * @type Object
- * @typedef Strapi4ApiMetaPaginationByOffsetResponse
  * @property {number} start
  * @property {number} limit
  * @property {number} total
@@ -108,7 +97,6 @@ export interface Strapi4ApiMetaPaginationByOffsetResponse {
 
 /**
  * @type {Object}
- * @typedef Strapi4ApiMetaPaginationByPageResponse
  * @property {number} page
  * @property {number} pageSize
  * @property {number} pageCount

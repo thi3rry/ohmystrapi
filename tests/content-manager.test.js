@@ -1,5 +1,6 @@
 import {afterEach, describe, expect, test} from "vitest";
-import {useEntityApi, useStrapi} from "../src/index.js";
+import { useStrapi } from '../src/strapi.js';
+import {useEntityApi} from "../src/plugins/content-manager.js";
 import {$wait} from "../src/utils.js";
 const strapiUrl = 'http://localhost:1337';
 const strapi = useStrapi({
@@ -10,8 +11,7 @@ const strapi = useStrapi({
 describe.only('ContentManager', () => {
     describe('Articles', () => {
         afterEach(async () => $wait(0.8));
-
-        const strapiApiArticles = strapi.use('articles', useEntityApi, 'articles');
+        const strapiApiArticles = strapi.use(useEntityApi('articles'));
         test('find one has id', async () => {
             await expect(strapiApiArticles.findOne({id: 1})).resolves.toHaveProperty('id');
             expect.assertions(1);

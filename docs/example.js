@@ -9,25 +9,26 @@ import {
 const strapi = useStrapi({
     baseUrl: 'http://localhost:1337',
 });
-const strapiApi = {
-    user: useUsersPermissionsApi(strapi),
-    passwordLess: usePasswordLessApi(strapi),
-    article: useEntityApi('articles'),
-    setting: useSingleTypeEntityApi('settings')
-};
+const strapiAuth = strapi.use(useUsersPermissionsApi());
+strapi.use(usePasswordLessApi());
+const articlesApi = strapi.use(useEntityApi('articles', (obj) => ({id: obj.id, ...obj.attributes}), ['comments']));
+strapi.use(useEntityApi('settings', (obj) => ({id: obj.id, ...obj.attributes})));
 
 // Login a user
-await strapiApi.user.login({identifier: 'login@example.com', password: 'password'});
+await strapi.usersPermissions.login({identifier: 'login@example.com', password: 'password'});
+// Or
+await strapiAuth.login({identifier: 'login@example.com', password: 'password'});
+
 const personnalData = await strapiApi.user.me();
 
 
 // get articles
-const articles = await strapi.article.find();
+const articles = await articlesApi.find();
 articles.forEach(article => console.log(article.title));
 
 // get articles with "strapi" in content
-const articlesFiltered = await strapi.article.find({content: {$contains: 'strapi'}});
+const articlesFiltered = await strapi.articles.find({content: {$contains: 'strapi'}});
 articlesFiltered.forEach(article => console.log(article.title));
 
 // get the first article with title contains strapi
-const article = await strapi.article.searchOne({title: {$contains: 'strapi'}});
+const article = await strapi.articles.searchOne({title: {$contains: 'strapi'}});
