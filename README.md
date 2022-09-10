@@ -35,7 +35,10 @@ BUT! You can also use the [ohmystrapi content-manager plugin](#content-manager)
 #### ContentManager
 
 ```js
-strapi.use(useEntityApi('articles'));
+import ohMyStrapi from 'ohmystrapi';
+import {useSingleTypeEntityApi} from 'ohmystrapi';
+
+strapi.use(ohMyStrapi.useEntityApi('articles'));
 strapi.use(useSingleTypeEntityApi('settings'));
 
 // get articles
@@ -68,7 +71,9 @@ strapi.use(useEntityApi('articles', (obj) => ({id: obj.id, ...obj.attributes})))
 #### Auth user
 
 ```js
-strapi.use(useUsersPermissionsApi());
+import ohMyStrapi from 'ohmystrapi';
+
+strapi.use(ohMyStrapi.useUsersPermissionsApi());
 
 // Login a user
 await strapi.user.login({identifier: 'login@example.com', password: 'password'});
