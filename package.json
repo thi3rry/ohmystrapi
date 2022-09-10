@@ -1,5 +1,5 @@
 {
-  "name": "ohmystrapi",
+  "name": "@thi3rry/ohmystrapi",
   "version": "1.0.0-alpha",
   "description": "A lib based on OhMyFetch to consume strapi API",
   "main": "src/index.js",
