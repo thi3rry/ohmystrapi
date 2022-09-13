@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
+    "build": "webpack",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx vitest",
     "coverage": "NODE_OPTIONS=--experimental-vm-modules npx vitest run --coverage"
   },
@@ -17,7 +18,14 @@
     "qs": "^6.11.0"
   },
   "devDependencies": {
+    "@vitest/coverage-c8": "^0.23.2",
     "@vitest/ui": "^0.23.1",
-    "vitest": "^0.23.1"
-  }
+    "vitest": "^0.23.1",
+    "webpack-cli": "^4.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thi3rry/ohmystrapi.git"
+  },
+  "files": ["dist/ohmystrapi.bundle.js"]
 }

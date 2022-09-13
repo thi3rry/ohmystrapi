@@ -1,8 +1,8 @@
 import {$fetch} from 'ohmyfetch';
 import {getAuthHeaders, isTokenValid, resetAuthToken} from "./auth.js";
 import qs from "qs";
-import ltrim from 'locutus/php/strings/ltrim';
-import rtrim from 'locutus/php/strings/rtrim';
+import ltrim from 'locutus/php/strings/ltrim.js';
+import rtrim from 'locutus/php/strings/rtrim.js';
 
 /**
  *  The strapi sdk

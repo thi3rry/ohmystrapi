@@ -1,4 +1,4 @@
-import qs from "qs";
+import stringify from "qs/lib/stringify.js";
 import CollectionEntityApi from "../class/CollectionEntityApi.js";
 import SluggableEntityApi from "../class/CollectionEntityApi.js";
 import SingleTypeEntityApi from "../class/SingleTypeEntityApi.js";
@@ -28,7 +28,7 @@ export const useContentManagerApi = () => ({
              * @return {Promise<AxiosResponse<Strapi4ApiResponse<Strapi4SingleEntryApiResponse>>>}
              */
             async find (entity, searchParams) {
-                return await strapi.createFetch()(`${strapi.apiBaseUrl}/${entity}?${qs.stringify(searchParams)}`)
+                return await strapi.createFetch()(`${strapi.apiBaseUrl}/${entity}?${stringify(searchParams)}`)
             },
 
             /**
@@ -74,7 +74,7 @@ export const useContentManagerApi = () => ({
 
             async findOne (entity, id, queryParams = {}) {
                 try {
-                    const url = `${strapi.apiBaseUrl}/${entity}/${id}?${qs.stringify(queryParams)}`;
+                    const url = `${strapi.apiBaseUrl}/${entity}/${id}?${stringify(queryParams)}`;
                     const {data} = await (strapi.createFetch()(url));
                     return data;
                 }
@@ -84,7 +84,7 @@ export const useContentManagerApi = () => ({
             },
 
             async create (entity, attributes, queryParams = {}) {
-                const url = `${strapi.apiBaseUrl}/${entity}?${qs.stringify(queryParams)}`;
+                const url = `${strapi.apiBaseUrl}/${entity}?${stringify(queryParams)}`;
                 return strapi.createFetch()(url, {method: 'POST', body: {data: attributes}})
             },
 
@@ -98,7 +98,7 @@ export const useContentManagerApi = () => ({
              */
             async update (entity, id, attributes, queryParams= {}) {
                 try {
-                    const url = `${strapi.apiBaseUrl}/${entity}/${id}?${qs.stringify(queryParams)}`;
+                    const url = `${strapi.apiBaseUrl}/${entity}/${id}?${stringify(queryParams)}`;
                     const {data} = await (strapi.createFetch()(url, {method: 'PUT', body: attributes}))
                     return data;
                 }
